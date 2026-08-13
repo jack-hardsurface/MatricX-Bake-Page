@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MatricX Bake — Product Page</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+
+:root{
+  --bg:#0c0c0c;
+  --panel:#161616;
+  --panel2:#1c1c1c;
+  --line:#2b2b2b;
+  --text:#c9c9c9;
+  --dim:#8c8c8c;
+  --head:#f5f5f5;
+  --accent:#f26722;
+  --accent2:#ff8a4c;
+  --green:#4fc281;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+}
+.page{max-width:1040px;margin:0 auto;padding:0 0 100px}
+img{max-width:100%;display:block}
+
+h1,h2.sec,h3.sub{
+  font-family:'Anton',Impact,sans-serif;
+  font-weight:400;
+  text-transform:uppercase;
+  color:var(--head);
+  letter-spacing:.5px;
+  margin:0;
+}
+.kicker{
+  color:var(--accent);
+  font-family:'JetBrains Mono',monospace;
+  font-size:12.5px;
+  font-weight:500;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:0 0 10px;
+}
+.rule{height:3px;width:64px;background:var(--accent);margin:16px 0 26px;border:none}
+p{margin:0 0 14px;color:var(--text)}
+.dim{color:var(--dim)}
+
+/* ---------------- HERO ---------------- */
+.hero-img{width:100%;border-radius:2px;display:block}
+.hero-copy{padding:38px 6px 0}
+.hero-copy h1{font-size:34px;line-height:1.15;max-width:760px}
+.hero-copy h1 span{color:var(--accent)}
+.hero-sub{font-size:17px;color:var(--text);max-width:640px;margin-top:16px}
+
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 4px}
+.badge{
+  background:var(--panel);
+  border:1px solid var(--line);
+  color:var(--dim);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:9px 14px;
+  border-radius:4px;
+}
+.badge.on{background:var(--accent);color:#100800;border-color:var(--accent);font-weight:700}
+
+/* ---------------- BUTTONS ---------------- */
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Inter';font-weight:700;font-size:14px;
+  padding:13px 22px;border-radius:5px;text-decoration:none;
+  cursor:pointer;border:1.5px solid transparent;transition:transform .12s ease, background .12s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#150900}
+.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:transparent;color:var(--head);border-color:var(--line)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* ---------------- BEFORE/AFTER COMPARE SLIDER ---------------- */
+.compare{
+  position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
+  border-radius:6px;border:1px solid var(--line);margin:26px 0 10px;
+  touch-action:none;cursor:ew-resize;background:#000;
+}
+.compare img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  pointer-events:none;-webkit-user-select:none;user-select:none;
+}
+.compare .after-img{z-index:1}
+.compare .before-img{z-index:2;clip-path:inset(0 50% 0 0)}
+.compare-label{
+  position:absolute;top:14px;z-index:4;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:1.5px;color:#000;background:var(--accent);
+  padding:5px 10px;border-radius:3px;pointer-events:none;
+}
+.compare-label.before-lbl{left:14px}
+.compare-label.after-lbl{right:14px;background:var(--panel2);color:var(--head);border:1px solid var(--line)}
+.compare-handle{
+  position:absolute;top:0;bottom:0;left:50%;z-index:3;width:0;pointer-events:none;
+}
+.compare-handle .bar{position:absolute;top:0;bottom:0;left:-1px;width:2px;background:var(--accent)}
+.compare-handle .knob{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;color:#150900;
+  font-size:15px;font-weight:800;box-shadow:0 3px 14px rgba(0,0,0,.55);
+}
+.compare-hint{
+  text-align:center;color:var(--dim);font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;letter-spacing:.5px;margin:0 0 30px;
+}
+
+/* ---------------- SECTIONS ---------------- */
+section{padding:70px 6px 0}
+h2.sec{font-size:32px;line-height:1.15}
+h2.sec + .rule{margin:16px 0 22px}
+.lead{font-size:17.5px;color:var(--head);max-width:700px;font-weight:500}
+.body-col{max-width:680px}
+
+/* ---------------- IMAGE PLACEHOLDER ---------------- */
+.shot{
+  border:1.5px dashed #3a3a3a;
+  background:repeating-linear-gradient(135deg, #151515, #151515 10px, #181818 10px, #181818 20px);
+  border-radius:6px;
+  padding:26px;
+  margin:26px 0;
+  text-align:left;
+}
+.shot .tag{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  letter-spacing:1.5px;
+  color:#000;
+  background:var(--accent);
+  padding:4px 9px;
+  border-radius:3px;
+  margin-bottom:12px;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.shot h4{margin:0 0 8px;color:var(--head);font-size:15px;font-family:'Inter';font-weight:700}
+.shot p{margin:0;color:var(--dim);font-size:13.5px;max-width:560px}
+.shot .ratio{
+  margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#666;
+}
+
+/* ---------------- FEATURE IMAGE (provided) ---------------- */
+.feature-img-wrap{
+  border-radius:6px;overflow:hidden;border:1px solid var(--line);margin:26px 0;
+}
+
+/* ---------------- GRID CARDS ---------------- */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+@media(max-width:760px){.grid3,.grid2{grid-template-columns:1fr}}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:20px 20px 22px;
+}
+.card .num{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px}
+.card h4{color:var(--head);font-size:16.5px;margin:8px 0 8px;font-weight:700}
+.card p{color:var(--dim);font-size:13.8px;margin:0}
+
+/* ---------------- MATERIAL CATEGORY TABLE ---------------- */
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:14px}
+th{
+  background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;
+  font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);
+  font-family:'JetBrains Mono',monospace;font-weight:500;
+}
+td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--text);vertical-align:top}
+tr:nth-child(even) td{background:var(--panel)}
+td b{color:var(--head)}
+.count{color:var(--accent);font-weight:700}
+
+/* ---------------- LAYER STACK DIAGRAM ---------------- */
+.stack-diagram{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin:30px 0 8px;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:6px;
+}
+.stack-chip{
+  background:var(--panel2);border:1px solid var(--line);border-radius:5px;
+  padding:12px 16px;min-width:120px;
+}
+.stack-chip .n{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px;font-weight:700}
+.stack-chip .t{color:var(--head);font-size:13.5px;font-weight:700;margin-top:3px}
+.arrow{color:var(--accent);font-size:20px;font-weight:700}
+.stack-result{
+  background:var(--accent);color:#150900;border-radius:5px;padding:12px 18px;font-weight:800;
+  font-size:13.5px;letter-spacing:.5px;
+}
+
+/* ---------------- IMPERFECTION TYPE GROUPS ---------------- */
+.type-group{margin-bottom:26px}
+.type-group h4{
+  color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;
+  letter-spacing:2px;text-transform:uppercase;margin:0 0 12px;font-weight:600;
+}
+.type-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px}
+@media(max-width:600px){.type-list{grid-template-columns:1fr}}
+.type-item{
+  padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;
+}
+.type-item b{color:var(--head)}
+.type-item span{color:var(--dim);font-size:13px;display:block;margin-top:2px}
+
+/* ---------------- SPEC / INCLUDED TABLE ---------------- */
+.spec-block{
+  background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:26px 0;
+}
+.spec-row{display:flex;border-bottom:1px solid var(--line);padding:14px 20px}
+.spec-row:last-child{border-bottom:none}
+.spec-row .k{width:220px;flex-shrink:0;color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.5px;text-transform:uppercase}
+.spec-row .v{color:var(--text);font-size:14.5px}
+.spec-row .v b{color:var(--head)}
+
+/* ---------------- CALLOUT STRIP ---------------- */
+.strip{
+  display:flex;gap:24px;align-items:flex-start;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:0 6px 6px 0;padding:22px 24px;margin:30px 0;
+}
+@media(max-width:640px){.strip{flex-direction:column}}
+.strip .icon{color:var(--accent);font-family:'Anton';font-size:26px;flex-shrink:0}
+.strip h4{margin:0 0 6px;color:var(--head);font-size:16px}
+.strip p{margin:0;color:var(--dim);font-size:14px}
+
+/* ---------------- FOOTER ---------------- */
+footer{
+  margin-top:80px;padding:34px 6px 0;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+footer .brand{font-family:'Anton';color:var(--head);font-size:15px;letter-spacing:.5px}
+footer .brand span{color:var(--accent)}
+footer .tag{color:var(--dim);font-size:12.5px;font-family:'JetBrains Mono',monospace}
+
+/* ---------------- PAIN / COMPARISON COLUMNS ---------------- */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:700px){.pain-grid{grid-template-columns:1fr}}
+.pain-col{border-radius:6px;padding:22px 22px 24px}
+.pain-col.old{background:var(--panel);border:1px solid var(--line)}
+.pain-col.new{background:var(--panel);border:1px solid var(--accent)}
+.pain-col .label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;font-weight:700}
+.pain-col.old .label{color:var(--dim)}
+.pain-col.new .label{color:var(--accent)}
+.pain-step{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--text)}
+.pain-step:last-child{border-bottom:none}
+.pain-col.old .pain-step{color:var(--dim)}
+.pain-col.new .pain-step{color:var(--head);font-weight:600}
+
+/* ---------------- WORKFLOW STEPS ---------------- */
+.workflow-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:28px 0}
+.workflow-step{
+  background:var(--panel2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;min-width:110px;text-align:center;
+}
+.workflow-step .wn{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px;font-weight:700}
+.workflow-step .wt{color:var(--head);font-size:13px;font-weight:700;margin-top:4px}
+.workflow-arrow{color:var(--accent);font-size:18px}
+
+/* ---------------- PULL QUOTE ---------------- */
+.pull-quote{
+  border-left:3px solid var(--accent);padding:6px 0 6px 24px;margin:30px 0;
+}
+.pull-quote p{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:none;
+  color:var(--head);font-size:22px;line-height:1.35;margin:0;letter-spacing:.2px;
+}
+
+/* ---------------- CONTRAST TABLE ---------------- */
+.contrast-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.contrast-row:last-child{border-bottom:none}
+.contrast-old{color:var(--dim);font-size:14px;text-align:right}
+.contrast-arrow{color:var(--accent);font-size:14px;font-family:'JetBrains Mono',monospace}
+.contrast-new{color:var(--head);font-size:14px;font-weight:600}
+
+/* ---------------- PILLAR TAGS ---------------- */
+.pillars{display:flex;gap:12px;margin:26px 0;flex-wrap:wrap}
+.pillar{
+  background:var(--panel);border:1px solid var(--line);border-radius:6px;
+  padding:16px 20px;flex:1;min-width:160px;
+}
+.pillar .pt{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.pillar-tags{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.pillar-tag{
+  background:var(--panel2);border:1px solid var(--line);border-radius:20px;
+  padding:7px 14px;font-size:12.5px;color:var(--text);
+}
+.pillar-tag b{color:var(--accent)}
+
+/* ---------------- WHO IT'S FOR ---------------- */
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:28px 0}
+.who-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px}
+.who-card .wh{color:var(--head);font-size:15px;font-weight:700;margin-bottom:6px}
+.who-card p{color:var(--dim);font-size:13.5px;margin:0}
+
+/* ---------------- VALUE STACK LIST ---------------- */
+.value-list{list-style:none;margin:26px 0;padding:0}
+.value-list li{
+  display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);
+  font-size:14.5px;color:var(--text);align-items:flex-start;
+}
+.value-list li:last-child{border-bottom:none}
+.value-list .check{color:var(--accent);font-weight:800;flex-shrink:0}
+.value-list b{color:var(--head)}
+
+/* ---------------- FAQ ---------------- */
+.faq-item{border-bottom:1px solid var(--line);padding:18px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{color:var(--head);font-size:15.5px;font-weight:700;margin:0 0 8px}
+.faq-a{color:var(--dim);font-size:14px;margin:0}
+
+/* ---------------- FINAL CTA ---------------- */
+.final-cta{
+  background:linear-gradient(180deg, var(--panel), var(--panel2));
+  border:1px solid var(--line);border-top:3px solid var(--accent);
+  border-radius:8px;padding:44px 34px;text-align:center;margin:26px 0;
+}
+.final-cta h2{font-size:30px;max-width:600px;margin:0 auto}
+.final-cta p{max-width:520px;margin:16px auto 0;color:var(--text);font-size:15.5px}
+
+/* ---------------- ASSET PLACEHOLDER (detailed spec format) ---------------- */
+.asset-ph{
+  border:1.5px dashed #3a3a3a;
+  background:repeating-linear-gradient(135deg, #151515, #151515 10px, #181818 10px, #181818 20px);
+  border-radius:6px;padding:26px;margin:26px 0;
+}
+.asset-ph .aid{
+  display:inline-block;background:var(--accent);color:#000;font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border-radius:3px;margin-bottom:12px;
+}
+.asset-ph h4{margin:0 0 14px;color:var(--head);font-size:16px;font-weight:700}
+.asset-ph .af{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;font-size:13.5px;margin-bottom:6px}
+.asset-ph .af b{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600}
+.asset-ph .af span{color:var(--text)}
+
+/* ---------------- PRICING ---------------- */
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0}
+@media(max-width:900px){.pricing-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pricing-grid{grid-template-columns:1fr}}
+.price-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:26px 20px;display:flex;flex-direction:column;position:relative;
+}
+.price-card.popular{border-color:var(--accent);background:var(--panel2)}
+.price-card .pop-tag{
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#150900;font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:800;letter-spacing:1.5px;padding:4px 10px;border-radius:3px;
+}
+.price-card .pname{font-family:'JetBrains Mono',monospace;color:var(--dim);font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.price-card.popular .pname{color:var(--accent)}
+.price-card .pamount{font-family:'Anton',sans-serif;color:var(--head);font-size:34px;margin-bottom:4px}
+.price-card .pnote{color:var(--dim);font-size:12.5px;margin-bottom:18px;min-height:34px}
+.price-card ul{list-style:none;margin:0 0 22px;padding:0;flex-grow:1}
+.price-card li{color:var(--text);font-size:13px;padding:7px 0;border-bottom:1px solid var(--line)}
+.price-card li:last-child{border-bottom:none}
+.price-card a.btn{width:100%;justify-content:center;text-align:center}
+
+/* ---------------- PROMO MODULE ---------------- */
+.promo-module{
+  background:var(--panel2);border:1px dashed var(--accent);border-radius:8px;
+  padding:28px 26px;margin:30px 0;text-align:center;
+}
+.promo-module .plabel{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.promo-module h3{font-family:'Anton',sans-serif;color:var(--head);font-size:24px;margin:0 0 14px;text-transform:uppercase}
+.coupon-code{
+  display:inline-block;background:var(--bg);border:1px solid var(--accent);color:var(--accent);
+  font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;letter-spacing:2px;
+  padding:10px 20px;border-radius:5px;margin:6px 0 14px;
+}
+.promo-table{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.promo-tier{background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:10px 16px;font-size:12.5px;color:var(--dim)}
+.promo-tier b{color:var(--head)}
+.promo-tier s{color:#555}
+.promo-tier .disc{color:var(--accent);font-weight:700}
+
+/* ---------------- ECOSYSTEM PIPELINE ---------------- */
+.pipeline-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:26px 0;justify-content:center}
+.pipeline-node{
+  background:var(--panel);border:1px solid var(--line);border-radius:6px;
+  padding:14px 18px;text-align:center;min-width:120px;
+}
+.pipeline-node.hi{border-color:var(--accent);background:var(--panel2)}
+.pipeline-node .pn-label{color:var(--head);font-size:13px;font-weight:700}
+.pipeline-arrow{color:var(--accent);font-size:18px}
+
+/* ---------------- OPTIONAL MODULE MARKER ---------------- */
+.optional-module{border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:36px 0}
+.module-note{
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#666;letter-spacing:1px;
+  text-transform:uppercase;text-align:center;margin-bottom:20px;
+}
+
+/* ---------------- MATERIAL CAROUSEL ---------------- */
+.material-carousel{
+  position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--line);
+  background:#000;margin:26px 0 10px;touch-action:pan-y;
+}
+.mc-track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.mc-slide{flex:0 0 100%;position:relative;aspect-ratio:16/10}
+.mc-slide img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
+.mc-cap{
+  position:absolute;left:14px;bottom:14px;z-index:2;
+  background:var(--accent);color:#150900;font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:6px 12px;border-radius:4px;
+}
+.mc-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:38px;height:38px;border-radius:50%;background:rgba(12,12,12,.72);
+  border:1px solid var(--line);color:var(--head);font-size:18px;line-height:1;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.mc-arrow:hover{background:var(--accent);color:#150900;border-color:var(--accent)}
+.mc-arrow.mc-prev{left:12px}
+.mc-arrow.mc-next{right:12px}
+.mc-dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.mc-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--line);
+  border:none;cursor:pointer;padding:0;
+}
+.mc-dot.active{background:var(--accent);width:22px;border-radius:4px;transition:width .2s ease}
+.mc-hint{
+  text-align:center;color:var(--dim);font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.5px;margin:0 0 20px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ================================================================
+       MATRICX BAKE PAGE CONFIG
+
+       {{BAKE_REPO_BASE}}        — your GitHub Pages base URL for this repo,
+                                    e.g. https://jack-hardsurface.github.io/MatricX-Bake-Page/
+                                    Every image/gif src below uses this as a prefix —
+                                    find & replace it once, everywhere, after you
+                                    create the repo and upload assets.
+       {{BAKE_PRODUCT_URL}}      — this MatricX Bake Superhive listing URL (already
+                                    known: https://superhivemarket.com/products/matricx-bake-game-ready-texture-blender)
+       {{MATRICX_PRO_URL}}       — MatricX Pro listing (already known:
+                                    https://superhivemarket.com/products/matricx-pro-one-click-realistic-texture)
+       {{BAKE_DOCUMENTATION_URL}} — hosted MatricX Bake user guide URL, once uploaded
+  ================================================================= -->
+
+  <!-- SECTION 01 — HERO -->
+  <div class="hero-copy" style="padding-top:38px">
+    <p class="kicker">MatricX Bake &middot; Version 1.6.2 &middot; Blender Add-on</p>
+    <h1>One bake.<br><span>Game-ready textures.</span></h1>
+    <p class="hero-sub">Bake clean PBR maps from any material &mdash; including MatricX Pro's procedural imperfections &mdash; into one shared texture set, packed and ready for FBX or GLB export.</p>
+
+    <div class="badges">
+      <span class="badge on">One Texture Set</span>
+      <span class="badge on">Robust Bake UVs</span>
+      <span class="badge on">ORM / ARM / RMA Packing</span>
+      <span class="badge on">Decal Baking</span>
+      <span class="badge on">FBX / GLB Export</span>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn btn-primary cta-hero" href="{{BAKE_PRODUCT_URL}}" target="_blank" rel="noopener">Get MatricX Bake</a>
+      <a class="btn btn-secondary cta-workflow" href="#workflow" target="_self">See the Workflow</a>
+    </div>
+  </div>
+
+  <div class="asset-ph">
+    <span class="aid">Asset-Hero</span>
+    <h4>Hero Render / Banner</h4>
+    <div class="af"><b>Show</b><span>A finished, game-ready textured asset &mdash; ideally the same object rendered in-engine (Unity/Unreal/Godot viewport) to sell the "baked and exported" outcome.</span></div>
+    <div class="af"><b>Format</b><span>PNG or JPG, 1920&times;960 or similar wide banner ratio, matching the Pro hero style.</span></div>
+  </div>
+
+  <!-- SECTION 02 — PROBLEM RECOGNITION -->
+  <section>
+    <p class="kicker">01 / The Problem</p>
+    <h2 class="sec">Baking shouldn't mean<br>rebuilding your scene by hand.</h2>
+    <hr class="rule">
+    <p class="lead body-col">Getting from a finished Blender material to clean, game-ready texture maps is usually its own project.</p>
+    <p class="body-col">Overlapping UVs. Procedural masks that stretch or scramble the moment you join meshes. Manually packing AO, roughness and metallic into one channel. Decals that don't line up with the baked material. MatricX Bake is built to remove that entire second project.</p>
+
+    <div class="pain-grid">
+      <div class="pain-col old">
+        <div class="label">Manual Baking</div>
+        <div class="pain-step">Fix UVs by hand</div>
+        <div class="pain-step">Bake each object separately</div>
+        <div class="pain-step">Watch procedural masks break</div>
+        <div class="pain-step">Pack channels manually</div>
+        <div class="pain-step">Re-align decals after baking</div>
+        <div class="pain-step">Export and hope it lines up</div>
+      </div>
+      <div class="pain-col new">
+        <div class="label">MatricX Bake</div>
+        <div class="pain-step">Auto-Fix Bake UVs</div>
+        <div class="pain-step">One shared texture set</div>
+        <div class="pain-step">Coordinates preserved automatically</div>
+        <div class="pain-step">Pack with one click</div>
+        <div class="pain-step">Bake decals into the same atlas</div>
+        <div class="pain-step">Export FBX / GLB with manifest</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 03 — THE WORKFLOW -->
+  <section id="workflow">
+    <p class="kicker">02 / The Workflow</p>
+    <h2 class="sec">Prepare. Bake. Export.</h2>
+    <hr class="rule">
+
+    <div class="workflow-row">
+      <div class="workflow-step"><div class="wn">01</div><div class="wt">Select Object</div></div>
+      <div class="workflow-arrow">&rarr;</div>
+      <div class="workflow-step"><div class="wn">02</div><div class="wt">Prepare Mesh</div></div>
+      <div class="workflow-arrow">&rarr;</div>
+      <div class="workflow-step"><div class="wn">03</div><div class="wt">Choose Bake Maps</div></div>
+      <div class="workflow-arrow">&rarr;</div>
+      <div class="workflow-step"><div class="wn">04</div><div class="wt">Check &amp; Bake</div></div>
+      <div class="workflow-arrow">&rarr;</div>
+      <div class="workflow-step" style="background:var(--accent);border-color:var(--accent)"><div class="wn" style="color:#150900">05</div><div class="wt" style="color:#150900">Setup Material</div></div>
+    </div>
+
+    <p class="body-col dim" style="font-size:14px">Select the object or collection to bake &middot; repair or build a shared bake UV if needed &middot; choose which maps to bake &middot; check readiness and bake &middot; apply the result with Setup Baked Material.</p>
+
+    <div class="asset-ph">
+      <span class="aid">Asset-01</span>
+      <h4>Full Bake Workflow Sequence</h4>
+      <div class="af"><b>Show</b><span>One object (or small collection) going through all five steps above, in order.</span></div>
+      <div class="af"><b>Action</b><span>Prepare Mesh &rarr; select bake maps &rarr; Check &rarr; Bake &rarr; Setup Baked Material, viewport updating to the final baked result.</span></div>
+      <div class="af"><b>UI</b><span>MatricX Bake N-panel visible throughout.</span></div>
+      <div class="af"><b>Duration</b><span>15&ndash;25 seconds, looping.</span></div>
+      <div class="af"><b>Format</b><span>GIF or MP4, 1600&times;900 minimum.</span></div>
+      <div class="af"><b>Purpose</b><span>This is the single strongest conversion asset on the page.</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 04 — VISUAL PROOF -->
+  <section>
+    <p class="kicker">03 / The Result</p>
+    <h2 class="sec">Scattered UVs.<br>One clean atlas.</h2>
+    <hr class="rule">
+
+    <div class="asset-ph">
+      <span class="aid">Asset-02</span>
+      <h4>Before / After — Messy UVs vs. Clean Shared Atlas</h4>
+      <div class="af"><b>Show</b><span>Left/before: overlapping or per-object UVs, or a stretched procedural mask after joining meshes. Right/after: the same objects with a clean MX_Combined_AtlasUV and correctly baked textures.</span></div>
+      <div class="af"><b>Format</b><span>Two renders (or a UV editor screenshot pair), 1600&times;900. Can be wired into a drag-to-compare slider once both images exist &mdash; same component already built for MatricX Pro.</span></div>
+    </div>
+    <p class="body-col" style="text-align:center;color:var(--head);font-weight:600;margin-top:8px">One shared texture set. Every object lined up correctly.</p>
+  </section>
+
+  <!-- SECTION 05 — MATERIAL BAKE MAPS -->
+  <section>
+    <p class="kicker">04 / Material Bake</p>
+    <h2 class="sec">Clean PBR maps from<br>any material, any complexity.</h2>
+    <hr class="rule">
+    <p class="lead body-col">Bake maps from simple and complex node materials &mdash; procedural gradients, ColorRamp chains, and layered Mix Shader setups all resolve correctly.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin:22px 0;font-size:14px">
+      <tr>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Map</th>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Captures</th>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Color Space</th>
+      </tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line)"><b style="color:var(--head)">Base Color</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Procedural gradients, ColorRamp nodes, MatricX layers, complex shader chains</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">sRGB</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel)"><b style="color:var(--head)">Roughness</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">Principled, glass/refraction, or resolved shader nodes</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">Non-Color</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line)"><b style="color:var(--head)">Metallic</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Material nodes or inferred fallback sources</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Non-Color</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel)"><b style="color:var(--head)">Normal</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">Tangent-space normal detail</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">Non-Color</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line)"><b style="color:var(--head)">AO</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Scene AO or material Ambient Occlusion node output</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Non-Color</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel)"><b style="color:var(--head)">Emission</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">Emission color from the material</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">sRGB</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line)"><b style="color:var(--head)">Opacity</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Alpha/transparent shader output, with a glass-style fallback for glass and refraction shaders</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Non-Color</td></tr>
+      <tr><td style="padding:11px 14px"><b style="color:var(--head)">Height</b></td><td style="padding:11px 14px;color:var(--dim)">Displacement or bump height sources</td><td style="padding:11px 14px;color:var(--dim)">Non-Color</td></tr>
+    </table>
+
+    <div class="card" style="margin-top:22px">
+      <h4>Include Scene Lighting</h4>
+      <p>Base Color can use a lighting-aware Combined bake &mdash; capturing scene lights, direct and indirect light, shadows, glossy contribution and transmission. If one object casts a shadow onto another, that shadow bakes into the receiving object's map.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 06 — ONE TEXTURE SET -->
+  <section>
+    <p class="kicker">05 / One Texture Set</p>
+    <h2 class="sec">Bake a whole scene<br>into one atlas.</h2>
+    <hr class="rule">
+    <p class="lead body-col">Every mesh in the bake scope shares one atlas and one set of maps &mdash; instead of a separate texture set per object.</p>
+
+    <div class="grid2">
+      <div class="card"><h4>Per Object</h4><p>Each mesh gets its own texture set. Existing per-object UVs are fine as-is.</p></div>
+      <div class="card" style="border-color:var(--accent)"><h4 style="color:var(--accent)">One Texture Set</h4><p>All meshes in the bake scope share one atlas and one set of maps.</p></div>
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin:22px 0;font-size:14px">
+      <tr>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Atlas UV Option</th>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Use When</th>
+      </tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line)"><b style="color:var(--head)">Pack Existing Islands</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Each object already has good UV cuts &mdash; recommended default</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel)"><b style="color:var(--head)">Rebuild Shared Atlas</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">UVs are poor, missing, or overlap heavily</td></tr>
+      <tr><td style="padding:11px 14px"><b style="color:var(--head)">Use Existing UVs</b></td><td style="padding:11px 14px;color:var(--dim)">An artist already created a proper shared atlas</td></tr>
+    </table>
+
+    <div class="asset-ph">
+      <span class="aid">Asset-03</span>
+      <h4>One Texture Set in Action</h4>
+      <div class="af"><b>Show</b><span>Several separate objects, then the shared MX_Combined_AtlasUV layout, then the final baked result applied across all of them.</span></div>
+      <div class="af"><b>Format</b><span>GIF/MP4 or a 3-step image sequence, 1600&times;900.</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 07 — MATRICX PRO COMPATIBILITY -->
+  <section>
+    <p class="kicker">06 / Built to Work With MatricX Pro</p>
+    <h2 class="sec">Procedural imperfections<br>survive the bake.</h2>
+    <hr class="rule">
+    <p class="lead body-col">Joining objects normally breaks procedural masks. MatricX Bake stops that from happening.</p>
+    <p class="body-col">MatricX Pro's imperfection layers frequently use Object or Generated coordinates inside nested node groups. MatricX Bake stores each source object's original coordinates and substitutes them only on temporary copied materials &mdash; so dirt, wear, noise, bump and layered Mix Shader masks keep their original placement. Your source materials and node groups are never modified.</p>
+    <p class="body-col">Channel-consistent flattening compensation keeps MatricX Dirt from replacing broad metal regions with brown dielectric color, and keeps Edge Wear from baking stronger than the source material &mdash; while other Mix Shader materials use standard linear conversion.</p>
+
+    <div class="pipeline-row">
+      <div class="pipeline-node"><div class="pn-label">MatricX Pro<br><span class="dim" style="font-size:11px">Build Surface</span></div></div>
+      <div class="pipeline-arrow">&rarr;</div>
+      <div class="pipeline-node hi"><div class="pn-label">MatricX Bake<br><span class="dim" style="font-size:11px">Bake Textures</span></div></div>
+      <div class="pipeline-arrow">&rarr;</div>
+      <div class="pipeline-node"><div class="pn-label">Game Engine</div></div>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn btn-secondary cta-pro" href="{{MATRICX_PRO_URL}}" target="_blank" rel="noopener">Explore MatricX Pro</a>
+    </div>
+  </section>
+
+  <!-- SECTION 08 — MAP PACKING -->
+  <section>
+    <p class="kicker">07 / Map Packing</p>
+    <h2 class="sec">AO, roughness and metallic.<br>One channel each.</h2>
+    <hr class="rule">
+    <p class="lead body-col">Combine AO, Roughness and Metallic into one Non-Color image, packed for standard game-engine workflows.</p>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin:22px 0;font-size:14px">
+      <tr>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Mode</th>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Red</th>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Green</th>
+        <th style="background:var(--panel2);color:var(--head);text-align:left;padding:12px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid var(--accent);font-family:'JetBrains Mono',monospace">Blue</th>
+      </tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line)"><b style="color:var(--head)">ORM</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">AO</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Roughness</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);color:var(--dim)">Metallic</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel)"><b style="color:var(--head)">ARM</b></td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">AO</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">Roughness</td><td style="padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel);color:var(--dim)">Metallic</td></tr>
+      <tr><td style="padding:11px 14px"><b style="color:var(--head)">RMA</b></td><td style="padding:11px 14px;color:var(--dim)">Roughness</td><td style="padding:11px 14px;color:var(--dim)">Metallic</td><td style="padding:11px 14px;color:var(--dim)">AO</td></tr>
+    </table>
+    <p class="body-col dim" style="font-size:14px">Packing requires AO, Roughness and Metallic to be enabled. If a source map is missing, MatricX Bake warns and safely skips the packed output. Setup Baked Material can also split a packed map's channels back out if the individual maps aren't available.</p>
+  </section>
+
+  <!-- SECTION 09 — SETUP BAKED MATERIAL -->
+  <section>
+    <p class="kicker">08 / Preview</p>
+    <h2 class="sec">One click.<br>A ready preview material.</h2>
+    <hr class="rule">
+    <p class="lead body-col">Setup Baked Material builds a working PBR preview from your baked maps &mdash; correctly wired, every time.</p>
+
+    <ul class="value-list">
+      <li><span class="check">&#10003;</span><span>Base Color connects as sRGB</span></li>
+      <li><span class="check">&#10003;</span><span>Utility maps connect as Non-Color</span></li>
+      <li><span class="check">&#10003;</span><span>Normal maps use a Normal Map node</span></li>
+      <li><span class="check">&#10003;</span><span>Height maps connect through a Bump node</span></li>
+      <li><span class="check">&#10003;</span><span>Opacity maps connect to Alpha and enable transparency</span></li>
+      <li><span class="check">&#10003;</span><span>For One Texture Set, the material applies across every object in scope, using the shared atlas UV</span></li>
+    </ul>
+  </section>
+
+  <!-- SECTION 10 — DECALS, COMBINE, FINAL BAKE, EXPORT -->
+  <section>
+    <p class="kicker">09 / Decals &amp; Export</p>
+    <h2 class="sec">From baked material<br>to shipped asset.</h2>
+    <hr class="rule">
+
+    <div class="grid2">
+      <div class="card">
+        <div class="num">Decals</div>
+        <h4>Bake Scene Decals</h4>
+        <p>Bakes decal meshes into the active target's UVs. In One Texture Set mode, decal baking targets the full bake scope and writes into the same shared atlas as the material maps.</p>
+      </div>
+      <div class="card">
+        <div class="num">Combine</div>
+        <h4>Combine Decal &amp; Material</h4>
+        <p>Blends Base Color, Roughness, Metallic and Normal using the decal mask into one new PBR material. <b style="color:var(--head)">Combine Set &amp; Apply to All</b> assigns it across every receiver mesh automatically.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="num">Final Bake</div>
+        <h4>Flatten to Export-Ready Maps</h4>
+        <p>Flattens the current material into a simplified texture set after combining decals, or whenever a flattened game-ready result is needed.</p>
+      </div>
+      <div class="card">
+        <div class="num">Export</div>
+        <h4>Game Asset Export</h4>
+        <p>Packages the model, textures and an <b style="color:var(--head)">asset_manifest.json</b> file. Supports FBX and GLB depending on your export settings.</p>
+      </div>
+    </div>
+
+    <div class="asset-ph">
+      <span class="aid">Asset-04</span>
+      <h4>Decal Bake &rarr; Combine &rarr; Export</h4>
+      <div class="af"><b>Show</b><span>A decal being baked onto a shared atlas, then combined into the material, then the final Game Asset Export panel with FBX/GLB selected.</span></div>
+      <div class="af"><b>Format</b><span>GIF/MP4 or a 3-step image sequence, 1600&times;900.</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 11 — WHY MATRICX BAKE -->
+  <section>
+    <p class="kicker">10 / Why MatricX Bake</p>
+    <h2 class="sec">Built for the step<br>after the material is right.</h2>
+    <hr class="rule">
+
+    <div class="pull-quote">
+      <p>MatricX Bake exists for the moment a finished Blender material needs to leave Blender &mdash; without losing what made it look right in the first place.</p>
+    </div>
+
+    <div class="contrast-row">
+      <div class="contrast-old">Manual UV repair</div>
+      <div class="contrast-arrow">&rarr;</div>
+      <div class="contrast-new">Auto-Fix Bake UVs audit</div>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-old">Procedural masks break on join</div>
+      <div class="contrast-arrow">&rarr;</div>
+      <div class="contrast-new">Coordinates preserved automatically</div>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-old">Per-object texture sets</div>
+      <div class="contrast-arrow">&rarr;</div>
+      <div class="contrast-new">One shared atlas, packed correctly</div>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-old">Decals applied after the fact</div>
+      <div class="contrast-arrow">&rarr;</div>
+      <div class="contrast-new">Decals baked into the same atlas</div>
+    </div>
+  </section>
+
+  <!-- SECTION 12 — WHO IT'S FOR -->
+  <section>
+    <p class="kicker">11 / Built For</p>
+    <h2 class="sec">If you're shipping to<br>a game engine, this is for you.</h2>
+    <hr class="rule">
+    <div class="who-grid">
+      <div class="who-card"><div class="wh">Game Asset Artists</div><p>Clean, packed PBR maps ready for Unity, Unreal, Godot, or any engine that reads standard texture channels.</p></div>
+      <div class="who-card"><div class="wh">Technical Artists</div><p>Multi-object scenes baked into one shared atlas without manual UV surgery.</p></div>
+      <div class="who-card"><div class="wh">MatricX Pro Users</div><p>Procedural imperfections that survive baking and joining, exactly as authored.</p></div>
+      <div class="who-card"><div class="wh">Indie Developers</div><p>A complete path from finished Blender material to FBX/GLB export with a manifest.</p></div>
+    </div>
+  </section>
+
+  <!-- SECTION 13 — SPECIFICATIONS -->
+  <section id="specs">
+    <p class="kicker">Specifications</p>
+    <h2 class="sec">The technical details.</h2>
+    <hr class="rule">
+    <div class="spec-block">
+      <div class="spec-row"><div class="k">Requires</div><div class="v"><b>Blender 4.5+</b> and 5.0+ &mdash; 5.1 and 5.2 tested</div></div>
+      <div class="spec-row"><div class="k">Package format</div><div class="v">Classic add-on ZIP <b>and</b> Blender Extension package, both included</div></div>
+      <div class="spec-row"><div class="k">Bake maps</div><div class="v">Base Color, Roughness, Metallic, Normal, AO, Emission, Opacity, Height</div></div>
+      <div class="spec-row"><div class="k">Texture set modes</div><div class="v">Per Object, or One Texture Set with Pack Existing Islands / Rebuild Shared Atlas / Use Existing UVs</div></div>
+      <div class="spec-row"><div class="k">Map packing</div><div class="v">ORM, ARM, or RMA channel packing</div></div>
+      <div class="spec-row"><div class="k">Decals</div><div class="v">Bake Scene Decals, plus Combine Decal &amp; Material for a blended PBR result</div></div>
+      <div class="spec-row"><div class="k">Export</div><div class="v">FBX and GLB, with model, textures and an asset_manifest.json package</div></div>
+      <div class="spec-row"><div class="k">Advanced UV mode</div><div class="v">Optional MinistryOfFlat integration &mdash; Windows only; macOS/Linux use Normal UV mode with full feature access otherwise</div></div>
+      <div class="spec-row"><div class="k">Platforms</div><div class="v">Windows, macOS, Linux &mdash; GPU baking depends on your Blender/OS/hardware setup, with CPU fallback</div></div>
+      <div class="spec-row"><div class="k">License</div><div class="v">GNU General Public License v3.0 or later</div></div>
+    </div>
+  </section>
+
+  <!-- SECTION 14 — FAQ -->
+  <section>
+    <p class="kicker">12 / Before You Buy</p>
+    <h2 class="sec">The things<br>you should know.</h2>
+    <hr class="rule">
+
+    <div class="faq-item">
+      <p class="faq-q">Do I need MatricX Pro to use MatricX Bake?</p>
+      <p class="faq-a">No. MatricX Bake works with any Blender material. It includes extra compensation specifically for MatricX Pro's procedural imperfection layers, but that's a bonus, not a requirement.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can it bake multiple objects into one texture?</p>
+      <p class="faq-a">Yes &mdash; One Texture Set mode shares one atlas and one set of maps across every mesh in the bake scope.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What if my UVs are messy or missing?</p>
+      <p class="faq-a">Auto-Fix Bake UVs detects missing UVs, zero-area faces, stacked or overlapping faces, and out-of-tile coordinates, then creates a dedicated bake UV automatically. Your original UV layer is left untouched.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Does it support glass and refractive materials?</p>
+      <p class="faq-a">Yes, with the understanding that baked PBR maps can't perfectly recreate live refraction or caustics. Base Color with Include Scene Lighting, plus Roughness, Normal and Opacity, gets the closest visual match.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What export formats are supported?</p>
+      <p class="faq-a">FBX and GLB, packaged together with your textures and an asset_manifest.json file.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Does the advanced UV mode work on macOS or Linux?</p>
+      <p class="faq-a">The MinistryOfFlat-powered Advanced mode is Windows-only. On macOS and Linux, Normal UV mode is used instead, and every other workflow &mdash; material, decal, final bake, packing and export &mdash; remains fully available.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Which Blender versions are supported?</p>
+      <p class="faq-a">Blender 4.5 and 5.0 or newer, with 5.1 and 5.2 specifically tested.</p>
+    </div>
+
+    <p class="body-col dim" style="font-size:14px;margin-top:24px">Need the details? <a href="{{BAKE_DOCUMENTATION_URL}}" target="_blank" rel="noopener" style="color:var(--accent)">Read full documentation</a>.</p>
+  </section>
+
+  <!-- SECTION 15 — FINAL CTA -->
+  <section>
+    <div class="final-cta">
+      <p class="kicker" style="justify-content:center;display:flex">MatricX Bake</p>
+      <h2 class="sec">From finished material<br>to shipped asset.</h2>
+      <p>Clean PBR maps, one shared texture set, decals baked in, and an export package ready for your engine &mdash; without the manual cleanup.</p>
+
+      <div class="btn-row" style="justify-content:center;margin-top:22px">
+        <a class="btn btn-primary cta-final" href="{{BAKE_PRODUCT_URL}}" target="_blank" rel="noopener">Get MatricX Bake</a>
+        <a class="btn btn-secondary" href="{{MATRICX_PRO_URL}}" target="_blank" rel="noopener">Explore MatricX Pro</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="brand">MATRICX <span>BAKE</span></div>
+      <div class="tag">From material to shipped asset.</div>
+    </div>
+    <div class="tag">Built by Prasanth / EidosEdge</div>
+  </footer>
+
+  <!-- ================================================================
+       ASSET CHECKLIST — what to render/record before publishing
+
+       ASSET-Hero — Hero render/banner (Section 01)
+       ASSET-01   — Full bake workflow sequence, GIF/MP4 (Section 03)
+       ASSET-02   — Before/after: messy UVs vs. clean shared atlas (Section 04)
+       ASSET-03   — One Texture Set in action (Section 06)
+       ASSET-04   — Decal bake → Combine → Export sequence (Section 10)
+  ================================================================= -->
+
+
+</div>
+
+<script>
+// Before/After compare slider — drag or tap anywhere on the image to move the divider
+document.querySelectorAll('.compare').forEach(function(el){
+  var before = el.querySelector('.before-img');
+  var handle = el.querySelector('.compare-handle');
+  var dragging = false;
+
+  function setPct(pct){
+    pct = Math.max(0, Math.min(100, pct));
+    before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+    handle.style.left = pct + '%';
+  }
+
+  function pctFromEvent(e){
+    var rect = el.getBoundingClientRect();
+    return ((e.clientX - rect.left) / rect.width) * 100;
+  }
+
+  el.addEventListener('pointerdown', function(e){
+    dragging = true;
+    el.setPointerCapture(e.pointerId);
+    setPct(pctFromEvent(e));
+  });
+  el.addEventListener('pointermove', function(e){
+    if (dragging) setPct(pctFromEvent(e));
+  });
+  el.addEventListener('pointerup', function(){ dragging = false; });
+  el.addEventListener('pointercancel', function(){ dragging = false; });
+
+  setPct(50); // start centered
+});
+
+// Material collection carousel — arrows, dots, drag/swipe
+(function(){
+  var root = document.getElementById('material-carousel');
+  if (!root) return;
+  var track = root.querySelector('.mc-track');
+  var slides = root.querySelectorAll('.mc-slide');
+  var dotsWrap = document.getElementById('material-carousel-dots');
+  var count = slides.length;
+  var index = 0;
+
+  // build dots
+  for (var i = 0; i < count; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'mc-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    (function(idx){
+      dot.addEventListener('click', function(){ goTo(idx); });
+    })(i);
+    dotsWrap.appendChild(dot);
+  }
+  var dots = dotsWrap.querySelectorAll('.mc-dot');
+
+  function goTo(i){
+    index = (i + count) % count;
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    dots.forEach(function(d, di){ d.classList.toggle('active', di === index); });
+  }
+
+  root.querySelector('.mc-prev').addEventListener('click', function(){ goTo(index - 1); });
+  root.querySelector('.mc-next').addEventListener('click', function(){ goTo(index + 1); });
+
+  // drag / swipe support
+  var startX = 0, dragging = false, deltaX = 0;
+  root.addEventListener('pointerdown', function(e){
+    if (e.target.closest('.mc-arrow')) return; // let arrow buttons handle their own clicks
+    dragging = true; startX = e.clientX; deltaX = 0;
+    root.setPointerCapture(e.pointerId);
+    track.style.transition = 'none';
+  });
+  root.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    deltaX = e.clientX - startX;
+    var pct = (deltaX / root.clientWidth) * 100;
+    track.style.transform = 'translateX(calc(-' + (index * 100) + '% + ' + pct + '%))';
+  });
+  function endDrag(){
+    if (!dragging) return;
+    dragging = false;
+    track.style.transition = '';
+    if (Math.abs(deltaX) > root.clientWidth * 0.15) {
+      goTo(deltaX < 0 ? index + 1 : index - 1);
+    } else {
+      goTo(index);
+    }
+  }
+  root.addEventListener('pointerup', endDrag);
+  root.addEventListener('pointercancel', endDrag);
+  root.addEventListener('pointerleave', function(){ if (dragging) endDrag(); });
+
+  goTo(0);
+})();
+</script>
+
+</body>
+</html>
