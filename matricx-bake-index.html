@@ -461,7 +461,9 @@ footer .tag{color:var(--dim);font-size:12.5px;font-family:'JetBrains Mono',monos
   ================================================================= -->
 
   <!-- SECTION 01 — HERO -->
-  <div class="hero-copy" style="padding-top:38px">
+  <img class="hero-img" src="https://jack-hardsurface.github.io/MatricX-Bake-Page/Messy%20nodes.png" alt="MatricX Bake — raw, complex shader nodes before baking">
+
+  <div class="hero-copy">
     <p class="kicker">MatricX Bake &middot; Version 1.6.2 &middot; Blender Add-on</p>
     <h1>One bake.<br><span>Game-ready textures.</span></h1>
     <p class="hero-sub">Bake clean PBR maps from any material &mdash; including MatricX Pro's procedural imperfections &mdash; into one shared texture set, packed and ready for FBX or GLB export.</p>
@@ -478,13 +480,6 @@ footer .tag{color:var(--dim);font-size:12.5px;font-family:'JetBrains Mono',monos
       <a class="btn btn-primary cta-hero" href="{{BAKE_PRODUCT_URL}}" target="_blank" rel="noopener">Get MatricX Bake</a>
       <a class="btn btn-secondary cta-workflow" href="#workflow" target="_self">See the Workflow</a>
     </div>
-  </div>
-
-  <div class="asset-ph">
-    <span class="aid">Asset-Hero</span>
-    <h4>Hero Render / Banner</h4>
-    <div class="af"><b>Show</b><span>A finished, game-ready textured asset &mdash; ideally the same object rendered in-engine (Unity/Unreal/Godot viewport) to sell the "baked and exported" outcome.</span></div>
-    <div class="af"><b>Format</b><span>PNG or JPG, 1920&times;960 or similar wide banner ratio, matching the Pro hero style.</span></div>
   </div>
 
   <!-- SECTION 02 — PROBLEM RECOGNITION -->
@@ -537,31 +532,28 @@ footer .tag{color:var(--dim);font-size:12.5px;font-family:'JetBrains Mono',monos
 
     <p class="body-col dim" style="font-size:14px">Select the object or collection to bake &middot; repair or build a shared bake UV if needed &middot; choose which maps to bake &middot; check readiness and bake &middot; apply the result with Setup Baked Material.</p>
 
-    <div class="asset-ph">
-      <span class="aid">Asset-01</span>
-      <h4>Full Bake Workflow Sequence</h4>
-      <div class="af"><b>Show</b><span>One object (or small collection) going through all five steps above, in order.</span></div>
-      <div class="af"><b>Action</b><span>Prepare Mesh &rarr; select bake maps &rarr; Check &rarr; Bake &rarr; Setup Baked Material, viewport updating to the final baked result.</span></div>
-      <div class="af"><b>UI</b><span>MatricX Bake N-panel visible throughout.</span></div>
-      <div class="af"><b>Duration</b><span>15&ndash;25 seconds, looping.</span></div>
-      <div class="af"><b>Format</b><span>GIF or MP4, 1600&times;900 minimum.</span></div>
-      <div class="af"><b>Purpose</b><span>This is the single strongest conversion asset on the page.</span></div>
+    <div class="shot-img-wrap">
+      <img src="https://jack-hardsurface.github.io/MatricX-Bake-Page/Bake%20Base%20Maps.gif" alt="MatricX Bake — bake settings turning raw shader nodes into clean bake maps" style="width:100%;display:block;border-radius:6px;border:1px solid var(--line);margin:24px 0;">
     </div>
   </section>
 
-  <!-- SECTION 04 — VISUAL PROOF -->
+  <!-- SECTION 04 — PREPARE MESH & UVS -->
   <section>
-    <p class="kicker">03 / The Result</p>
-    <h2 class="sec">Scattered UVs.<br>One clean atlas.</h2>
+    <p class="kicker">03 / Prepare Mesh &amp; UVs</p>
+    <h2 class="sec">Good UVs, without<br>the manual repair work.</h2>
     <hr class="rule">
+    <p class="lead body-col">A procedural material can look correct in the viewport without usable UVs. MatricX Bake audits the actual bake layout before it ever starts.</p>
 
-    <div class="asset-ph">
-      <span class="aid">Asset-02</span>
-      <h4>Before / After — Messy UVs vs. Clean Shared Atlas</h4>
-      <div class="af"><b>Show</b><span>Left/before: overlapping or per-object UVs, or a stretched procedural mask after joining meshes. Right/after: the same objects with a clean MX_Combined_AtlasUV and correctly baked textures.</span></div>
-      <div class="af"><b>Format</b><span>Two renders (or a UV editor screenshot pair), 1600&times;900. Can be wired into a drag-to-compare slider once both images exist &mdash; same component already built for MatricX Pro.</span></div>
+    <div class="shot-img-wrap">
+      <img src="https://jack-hardsurface.github.io/MatricX-Bake-Page/UV%20unwrap%20Gif.gif" alt="MatricX Bake preparing and unwrapping UVs for baking" style="width:100%;display:block;border-radius:6px;border:1px solid var(--line);margin:24px 0;">
     </div>
-    <p class="body-col" style="text-align:center;color:var(--head);font-weight:600;margin-top:8px">One shared texture set. Every object lined up correctly.</p>
+
+    <div class="grid2">
+      <div class="card"><h4>Normal Mode</h4><p>Best for simple and medium meshes. Uses Blender's own unwrap and packing tools &mdash; fast and reliable for common props.</p></div>
+      <div class="card"><h4>Advanced Mode</h4><p>Best for dense, subdivided, or overlap-prone meshes. Uses MinistryOfFlat when configured (Windows only).</p></div>
+    </div>
+
+    <p class="body-col dim" style="font-size:14px">With Auto-Fix Bake UVs enabled, MatricX Bake detects missing UVs, zero-area faces, stacked or overlapping faces, and coordinates outside the 0&ndash;1 tile. When the active layout is unsafe, it creates a dedicated <b style="color:var(--text)">MX_BakeUV</b> and leaves your original UV layer untouched.</p>
   </section>
 
   <!-- SECTION 05 — MATERIAL BAKE MAPS -->
@@ -714,11 +706,8 @@ footer .tag{color:var(--dim);font-size:12.5px;font-family:'JetBrains Mono',monos
       </div>
     </div>
 
-    <div class="asset-ph">
-      <span class="aid">Asset-04</span>
-      <h4>Decal Bake &rarr; Combine &rarr; Export</h4>
-      <div class="af"><b>Show</b><span>A decal being baked onto a shared atlas, then combined into the material, then the final Game Asset Export panel with FBX/GLB selected.</span></div>
-      <div class="af"><b>Format</b><span>GIF/MP4 or a 3-step image sequence, 1600&times;900.</span></div>
+    <div class="shot-img-wrap">
+      <img src="https://jack-hardsurface.github.io/MatricX-Bake-Page/Bak%20decal%20%26%20Combine%20Maps.gif" alt="MatricX Bake decal baking, combine, and final bake workflow" style="width:100%;display:block;border-radius:6px;border:1px solid var(--line);margin:24px 0;">
     </div>
   </section>
 
@@ -847,13 +836,13 @@ footer .tag{color:var(--dim);font-size:12.5px;font-family:'JetBrains Mono',monos
   </footer>
 
   <!-- ================================================================
-       ASSET CHECKLIST — what to render/record before publishing
+       ASSET CHECKLIST — status
 
-       ASSET-Hero — Hero render/banner (Section 01)
-       ASSET-01   — Full bake workflow sequence, GIF/MP4 (Section 03)
-       ASSET-02   — Before/after: messy UVs vs. clean shared atlas (Section 04)
-       ASSET-03   — One Texture Set in action (Section 06)
-       ASSET-04   — Decal bake → Combine → Export sequence (Section 10)
+       ASSET-Hero — Hero image — DELIVERED (Messy nodes.png, Section 01)
+       ASSET-01   — Workflow sequence — DELIVERED (Bake Base Maps.gif, Section 02)
+       (new)      — Prepare Mesh & UVs — DELIVERED (UV unwrap Gif.gif, Section 03)
+       ASSET-03   — One Texture Set in action — STILL NEEDED (Section 06)
+       ASSET-04   — Decal bake → Combine → Export — DELIVERED (Bak decal & Combine Maps.gif, Section 09)
   ================================================================= -->
 
 
