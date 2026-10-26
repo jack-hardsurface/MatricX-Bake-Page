@@ -7,6 +7,7 @@
 <meta name="description" content="MatricX Bake for Blender bakes MatricX PRO materials, node setups and decals into clean PBR texture sets — one object, a collection or one shared atlas — and exports FBX or GLB for Unity, Unreal and Godot.">
 <meta property="og:title" content="MatricX Bake — Procedural Materials In, Game-Ready Textures Out">
 <meta property="og:description" content="Bake materials and decals into PBR texture sets and export game assets from Blender 4.5–5.2.">
+<meta property="og:image" content="https://jack-hardsurface.github.io/MatricX-Bake-Page/hero/og-bake.jpg">
 <link rel="icon" href="https://jack-hardsurface.github.io/MatricX-Pro-Page/assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -319,6 +320,73 @@ footer a:hover { color: var(--orange); }
 .home-link .short { display: none; }
 @media (max-width: 520px) { .home-link .long { display: none; } .home-link .short { display: inline; } .topbar-inner { gap: 14px; } }
 @media (max-width: 860px) { .topbar-inner > .btn { margin-left: auto; } }
+
+/* Hero: one material in, four baked maps out (the owner's hydrant bake) */
+.mapx { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); text-align: left;
+  border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.55);
+  background: radial-gradient(ellipse 55% 65% at 28% 60%, rgba(242,103,34,.20), transparent 70%), #0c0c0c; }
+.mapx-stage { position: relative; height: 560px; display: flex; justify-content: center; align-items: flex-end; padding-top: 40px;
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent); }
+.mapx-figure { position: relative; height: 100%; aspect-ratio: 684 / 1050; }
+.mapx-figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.mapx-split, .mapx-cuts, .mapx-nums { position: absolute; inset: 0; transition: opacity .35s ease; }
+.mapx-split { animation: mapx-reveal 1.9s .5s cubic-bezier(.65,.05,.3,1) both; }
+.mapx-split .s2 { clip-path: polygon(55% 0, 75% 0, 35% 100%, 15% 100%); }
+.mapx-split .s3 { clip-path: polygon(75% 0, 95% 0, 55% 100%, 35% 100%); }
+.mapx-split .s4 { clip-path: polygon(95% 0, 100% 0, 100% 100%, 55% 100%); }
+.mapx-cuts svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible;
+  filter: drop-shadow(0 0 6px rgba(242,103,34,.85)); animation: mapx-fade .6s 2.3s both; }
+.mapx-cuts line { stroke: var(--orange); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.mapx-nums span { position: absolute; top: 45%; transform: translate(-50%, -50%); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+  color: var(--orange); background: rgba(10,10,10,.85); border: 1px solid rgba(242,103,34,.5); border-radius: 4px; padding: 2px 7px;
+  animation: mapx-fade .6s 2.4s both; }
+.mapx-nums span:nth-child(1) { left: 22%; } .mapx-nums span:nth-child(2) { left: 47%; }
+.mapx-nums span:nth-child(3) { left: 67%; } .mapx-nums span:nth-child(4) { left: 87%; }
+.mapx-scan { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background: var(--green); box-shadow: 0 0 22px 5px rgba(105,240,174,.55);
+  animation: mapx-scan 1.9s .5s cubic-bezier(.65,.05,.3,1) both; pointer-events: none; }
+.mapx-focus { opacity: 0; transition: opacity .35s ease; }
+.mapx[data-focus] .mapx-split, .mapx[data-focus] .mapx-cuts, .mapx[data-focus] .mapx-nums { opacity: 0; }
+.mapx[data-focus="roughness"] .f-roughness, .mapx[data-focus="metallic"] .f-metallic, .mapx[data-focus="normal"] .f-normal { opacity: 1; }
+@keyframes mapx-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes mapx-scan { 0% { left: 0; opacity: 1; } 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+@keyframes mapx-fade { from { opacity: 0; } to { opacity: 1; } }
+.mapx-panel { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 32px 30px;
+  border-left: 1px solid var(--line); background: rgba(10,10,10,.6); }
+.mapx-panel .kicker { margin-bottom: 4px; }
+.mapx-panel h3 { font-size: 30px; margin-bottom: 2px; }
+.mapx-panel .hint { color: #8a8a8a; font-size: 13.5px; margin: 0 0 6px; }
+.mt { display: grid; grid-template-columns: auto 52px 1fr auto; gap: 14px; align-items: center; width: 100%; text-align: left;
+  font: inherit; color: inherit; cursor: pointer; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px;
+  transition: border-color .2s, background .2s; }
+.mt:hover, .mt[aria-pressed="true"] { border-color: var(--orange); background: var(--panel-hover); }
+.mt:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.mt .no { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--orange); }
+.mt .th { width: 52px; height: 52px; border-radius: 6px; background: #050505; overflow: hidden; }
+.mt .th img { width: 100%; height: 100%; object-fit: cover; object-position: 52% 62%; transform: scale(3.4); }
+.mt .nm { display: block; font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; font-size: 18px; color: var(--head); letter-spacing: .4px; line-height: 1.15; }
+.mt .fn { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #8f8f8f; overflow-wrap: anywhere; }
+.mt .cs { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--green);
+  border: 1px solid rgba(105,240,174,.35); border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
+@media (max-width: 860px) {
+  .mapx { grid-template-columns: 1fr; }
+  .mapx-stage { height: 430px; }
+  .mapx-panel { border-left: none; border-top: 1px solid var(--line); padding: 22px 16px; }
+  .mapx-panel h3 { font-size: 24px; }
+}
+@media (max-width: 520px) {
+  .mapx-stage { height: 360px; }
+  .mt { grid-template-columns: 44px 1fr; gap: 10px; padding: 8px 10px; }
+  .mt .no, .mt .cs { display: none; }
+  .mt .th { width: 44px; height: 44px; }
+  .mapx-nums { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mapx-split, .mapx-scan, .mapx-cuts svg, .mapx-nums span { animation: none; }
+  .mapx-scan { display: none; }
+  .mapx-split, .mapx-focus, .mapx-cuts, .mapx-nums, .mt { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -357,8 +425,47 @@ footer a:hover { color: var(--orange); }
     </p>
 
     <div class="hero-img-wrap">
-      <div class="frame"><img src="https://jack-hardsurface.github.io/MatricX-Bake-Page/Messy%20nodes.png" width="1920" height="960" alt="A tangle of procedural shader nodes - the kind of material MatricX Bake turns into plain image textures."></div>
-      <p class="caption">Complex node materials in &middot; clean PBR texture maps out</p>
+      <div class="mapx" id="mapx">
+        <div class="mapx-stage">
+          <div class="mapx-figure">
+            <img src="hero/hydrant-basecolor.webp" width="684" height="1050"
+                 alt="A worn red fire hydrant baked by MatricX Bake, shown split into its Base Color, Roughness, Normal and Metallic maps.">
+            <div class="mapx-split" aria-hidden="true">
+              <img class="s2" src="hero/hydrant-roughness.webp" alt="">
+              <img class="s3" src="hero/hydrant-normal.webp" alt="">
+              <img class="s4" src="hero/hydrant-metallic.webp" alt="">
+            </div>
+            <img class="mapx-focus f-roughness" src="hero/hydrant-roughness.webp" alt="" aria-hidden="true">
+            <img class="mapx-focus f-metallic" src="hero/hydrant-metallic.webp" alt="" aria-hidden="true">
+            <img class="mapx-focus f-normal" src="hero/hydrant-normal.webp" alt="" aria-hidden="true">
+            <div class="mapx-cuts" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="55" y1="0" x2="15" y2="100"/><line x1="75" y1="0" x2="35" y2="100"/><line x1="95" y1="0" x2="55" y2="100"/></svg></div>
+            <div class="mapx-nums" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span></div>
+            <span class="mapx-scan" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="mapx-panel">
+          <div class="kicker">Baked texture set</div>
+          <h3>One Material In.<br><span class="orange-text">Four Maps Out.</span></h3>
+          <p class="hint">Hover or tap a map to see it on the model; tap again for the split view.</p>
+          <button class="mt" type="button" data-map="basecolor" aria-pressed="false">
+            <span class="no">01</span><span class="th"><img src="hero/hydrant-basecolor.webp" alt="" loading="lazy"></span>
+            <span><span class="nm">Base Color</span><span class="fn">Hydrant_BaseColor.png</span></span><span class="cs">sRGB</span>
+          </button>
+          <button class="mt" type="button" data-map="roughness" aria-pressed="false">
+            <span class="no">02</span><span class="th"><img src="hero/hydrant-roughness.webp" alt="" loading="lazy"></span>
+            <span><span class="nm">Roughness</span><span class="fn">Hydrant_Roughness.png</span></span><span class="cs">Non-Color</span>
+          </button>
+          <button class="mt" type="button" data-map="normal" aria-pressed="false">
+            <span class="no">03</span><span class="th"><img src="hero/hydrant-normal.webp" alt="" loading="lazy"></span>
+            <span><span class="nm">Normal</span><span class="fn">Hydrant_Normal.png</span></span><span class="cs">Non-Color</span>
+          </button>
+          <button class="mt" type="button" data-map="metallic" aria-pressed="false">
+            <span class="no">04</span><span class="th"><img src="hero/hydrant-metallic.webp" alt="" loading="lazy"></span>
+            <span><span class="nm">Metallic</span><span class="fn">Hydrant_Metallic.png</span></span><span class="cs">Non-Color</span>
+          </button>
+        </div>
+      </div>
+      <p class="caption">A procedural fire hydrant material, baked by MatricX Bake into clean PBR maps</p>
     </div>
 
     <div class="cta-row">
@@ -383,6 +490,8 @@ footer a:hover { color: var(--orange); }
         have to become ordinary image textures first &mdash; and doing that by hand means bake setups, UV juggling and
         rewiring materials for every object.</p>
     </div>
+    <div class="frame" style="max-width: 900px; margin: 0 auto 36px;"><img src="https://jack-hardsurface.github.io/MatricX-Bake-Page/Messy%20nodes.png" width="1920" height="960" loading="lazy"
+         alt="A tangle of procedural shader nodes - the kind of material MatricX Bake turns into plain image textures."></div>
     <div class="chips" aria-label="Maps MatricX Bake writes">
       <span class="chip accent">Base Color</span><span class="chip">Lit Color</span><span class="chip">Roughness</span>
       <span class="chip">Metallic</span><span class="chip">Normal</span><span class="chip">Ambient Occlusion</span>
@@ -732,6 +841,24 @@ window.MX_STORE_PAGE = {
   try { framed = window.self !== window.top; } catch (e) { framed = true; }
   if (!framed) return;
   document.querySelectorAll('[data-home]').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; });
+})();
+</script>
+<script>
+/* Hero: hovering a map tile shows that map on the whole model; a click or tap pins it (again = split view). */
+(function () {
+  var root = document.getElementById('mapx');
+  if (!root) return;
+  var tiles = root.querySelectorAll('[data-map]'), pinned = null;
+  function show(map) {
+    if (map) root.setAttribute('data-focus', map); else root.removeAttribute('data-focus');
+    tiles.forEach(function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-map') === map ? 'true' : 'false'); });
+  }
+  tiles.forEach(function (t) {
+    var map = t.getAttribute('data-map');
+    t.addEventListener('mouseenter', function () { if (!pinned) show(map); });
+    t.addEventListener('mouseleave', function () { if (!pinned) show(null); });
+    t.addEventListener('click', function () { pinned = pinned === map ? null : map; show(pinned); });
+  });
 })();
 </script>
 </body>
