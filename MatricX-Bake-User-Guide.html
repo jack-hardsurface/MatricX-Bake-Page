@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>MatricX Bake 1.6.2 — Official User Guide</title>
+<title>MatricX Bake 1.7.8 — Official User Guide</title>
 <style>
   :root{
     --bg:#111111; --panel:#1b1b1b; --panel2:#202020; --line:#2e2e2e;
@@ -120,15 +120,15 @@
   <h1>MATRICX<span class="pro">BAKE</span></h1>
   <div class="rule"></div>
   <h2>Official User Guide</h2>
-  <p class="sub">Material baking · shared texture sets · decals · game export · version 1.6.2</p>
+  <p class="sub">Material baking · shared texture sets · decals · game export · version 1.7.8</p>
 
   <div class="badges">
     <span class="badge on">BLENDER ADD-ON</span>
-    <span class="badge">v1.6.2</span>
-    <span class="badge">JULY 2026</span>
+    <span class="badge">v1.7.8</span>
+    <span class="badge">OCTOBER 2026</span>
   </div>
   <p class="byline">Created by <b>Prasanth / Eidos Edge</b><br>
-     Requires Blender 4.5+ or 5.0+ · 5.1 and 5.2 tested</p>
+     Requires Blender 4.5+ · tested on 4.5, 5.1 and 5.2</p>
 </div>
 
 <!-- ============================= CONTENTS ============================= -->
@@ -148,6 +148,7 @@
     <a href="#decals"><span>09</span> Decals, Final Bake, and Export</a>
     <a href="#trouble"><span>10</span> Troubleshooting</a>
     <a href="#platform"><span>11</span> Cross-platform notes and license</a>
+    <a href="#whatsnew"><span>12</span> What&rsquo;s new in 1.7</a>
   </div>
 </section>
 
@@ -173,32 +174,33 @@
   <h2 class="sec">Install and Open</h2>
   <div class="rule"></div>
 
-  <p>MatricX Bake 1.6.2 is provided in two ZIP formats. Keep the ZIP compressed when installing.</p>
+  <p>MatricX Bake 1.7.8 is provided in two ZIP formats. Install <b style="color:var(--head)">one</b> of them, not both, and keep the ZIP compressed when installing.</p>
 
   <table>
     <tr><th>Package</th><th>Use For</th><th>Install Path</th></tr>
-    <tr><td><b>MatricX_Bake_1.6.2.zip</b></td><td>Classic Blender addon install.</td><td>Edit &gt; Preferences &gt; Add-ons &gt; Install</td></tr>
-    <tr><td><b>MatricX_Bake_1.6.2_Extension.zip</b></td><td>Blender Extension style install.</td><td>Edit &gt; Preferences &gt; Add-ons &gt; Install from Disk</td></tr>
+    <tr><td><b>MatricX_Bake_1.7.8_Blender_Extension.zip</b></td><td>Blender Extension install (recommended).</td><td>Edit &gt; Preferences &gt; Get Extensions &gt; Install from Disk</td></tr>
+    <tr><td><b>MatricX_Bake_1.7.8_Addon.zip</b></td><td>Classic Blender add-on install.</td><td>Edit &gt; Preferences &gt; Add-ons &gt; Install from Disk, then enable MatricX Bake</td></tr>
   </table>
 
   <h3>Supported Blender Versions</h3>
   <div class="badges" style="margin:8px 0 20px">
     <span class="badge on">Blender 4.5+</span>
-    <span class="badge on">Blender 5.0+</span>
+    <span class="badge on">4.5 tested</span>
     <span class="badge on">5.1 tested</span>
     <span class="badge on">5.2 tested</span>
   </div>
 
   <p>Open the tool from <code>3D View &gt; Sidebar &gt; MatricX Bake</code>.</p>
+  <p>The Extension asks you to approve two permissions: <b style="color:var(--head)">Network</b>, used only by the optional Download MinistryOfFlat button, and <b style="color:var(--head)">Files</b>, for writing baked maps and exported assets to your output folder.</p>
 
   <h3>Clean Upgrade</h3>
   <ol>
     <li>Disable older MatricX Bake versions.</li>
     <li>Remove old copies from Blender add-ons or extension folders.</li>
-    <li>Install the 1.6.2 ZIP.</li>
+    <li>Install the 1.7.8 ZIP.</li>
     <li>Restart Blender if an older module was already loaded.</li>
   </ol>
-  <div class="note"><p>If Blender Development for VS Code is used, make sure the development path points to the current 1.6.2 source folder.</p></div>
+  <div class="note"><p>If Blender Development for VS Code is used, make sure the development path points to the current 1.7.8 source folder.</p></div>
 </section>
 
 <!-- ============================= WORKFLOW ============================= -->
@@ -207,15 +209,15 @@
   <h2 class="sec">Main Workflow</h2>
   <div class="rule"></div>
 
-  <p>The panel is organized in the same order users normally work.</p>
+  <p>The panel is numbered in the order you work: <b style="color:var(--head)">1 Prepare UVs &gt; 2 Bake Maps &gt; 3 Decals &gt; 4 Combine &gt; 5 Final Bake &gt; 6 Export</b>. Steps 3&ndash;6 are optional.</p>
 
   <table>
     <tr><th>Panel Section</th><th>Purpose</th></tr>
     <tr><td><b>Prepare Mesh</b></td><td>Create or repair UVs before baking.</td></tr>
     <tr><td><b>Material Bake</b></td><td>Bake material maps, choose output, pack maps, and select bake scope.</td></tr>
-    <tr><td><b>Bake Scene Decals</b></td><td>Bake decal meshes into the active target UVs.</td></tr>
+    <tr><td><b>Bake Scene Decals</b></td><td>Bake decal meshes into the target's UVs (the whole bake scope in One Texture Set mode).</td></tr>
     <tr><td><b>Combine Decal &amp; Material</b></td><td>Blend material maps and decal maps into a new PBR material.</td></tr>
-    <tr><td><b>Final Bake</b></td><td>Flatten the current material into export-friendly maps.</td></tr>
+    <tr><td><b>Final Bake</b></td><td>Flatten the decal-combined material into export-friendly maps. Only needed if you added decals.</td></tr>
     <tr><td><b>Game Asset Export</b></td><td>Package model, textures, and an asset manifest.</td></tr>
   </table>
 
@@ -226,8 +228,9 @@
     <li>Select maps under Material Bake.</li>
     <li>Choose Output, Map Packing, Objects, and Performance settings.</li>
     <li>Click Check, then Bake.</li>
-    <li>Click Setup Baked Material to apply the baked maps.</li>
+    <li>Click Setup Baked Material to apply the baked maps. In a Selected, Collection or Visible scope it sets up every object in the scope.</li>
   </ol>
+  <div class="note"><p>Without decals, the Step 2 maps are already final: go straight to Game Asset Export.</p></div>
 </section>
 
 <!-- ============================= UVS ============================= -->
@@ -248,7 +251,7 @@
   <p>Keep Auto-Fix Bake UVs enabled to detect missing UVs, zero-area faces, stacked or overlapping faces, and coordinates outside the 0&ndash;1 tile. When the active layout is unsafe, the add-on creates a dedicated <code>MX_BakeUV</code> and leaves the artist's original UV layer intact. Setup Baked Material reads the bake manifest and uses that exact UV map.</p>
 
   <h3>MinistryOfFlat</h3>
-  <p>Advanced UV mode can use <code>MinistryOfFlat_Release.zip</code>. Its console executable is Windows-only. On macOS and Linux, use Normal UV mode; the material, decal, final-bake, packing, and export workflows remain fully available.</p>
+  <p>Advanced UV mode can use <code>MinistryOfFlat_Release.zip</code>. Its console executable is Windows-only, so on macOS and Linux the panel hides the MinistryOfFlat options and Advanced UV Unwrap uses Blender's built-in unwrap. The material, decal, final-bake, packing, and export workflows are fully available on every system.</p>
   <p>If the configured zip exists, the panel shows MinistryOfFlat installed. If not, the download button appears. Blender's Online Access preference must be enabled before downloading.</p>
 
   <ul>
@@ -257,6 +260,10 @@
     <li><b>Weld Temp:</b> Lets MinistryOfFlat weld duplicate vertices internally.</li>
     <li><b>Extra Flags:</b> Optional command line flags for advanced users.</li>
   </ul>
+
+  <h3>MatricX Pro Trim Sheets</h3>
+  <p>Faces that use a MatricX Pro trim material (Atlas or Mesh mode) keep their exact place on the trim sheet: Prepare UVs unwraps only the other faces, and the panel shows how many trim faces are in the bake scope. Use a higher bake resolution for sharp trim detail.</p>
+  <p>Every bake step &mdash; Bake, Setup Baked Material, Final Bake and decals &mdash; hands your own active UV map back afterwards, so trims never need to be applied again.</p>
 
   <div class="note"><p>The advanced unwrap workflow uses temporary objects where possible. For one texture set baking, shared atlas UVs are intentionally written back to the source objects so the baked texture lines up.</p></div>
 </section>
@@ -281,9 +288,9 @@
     <tr><td><b>Height</b></td><td>Displacement or bump height sources.</td><td>Non-Color</td></tr>
   </table>
 
-  <h3>Include Scene Lighting</h3>
-  <p>When enabled, Base Color uses a lighting-aware Combined bake. It captures scene lights, direct light, indirect light, shadows, glossy contribution, and transmission where Blender supports it.</p>
-  <div class="note"><p>Scene lighting is baked onto the surface being baked. If Object A casts a shadow onto Object B, the shadow appears in Object B's baked map.</p></div>
+  <h3>Bake Lit Color</h3>
+  <p>Enable <b style="color:var(--head)">Bake Lit Color</b> to also bake a separate <code>LitColor</code> map with your scene lights and shadows. Base Color stays clean, so the material can still be rebuilt correctly from the maps.</p>
+  <div class="note"><p>Scene lighting is baked onto the surface being baked. If Object A casts a shadow onto Object B, the shadow appears in Object B's Lit Color map.</p></div>
 </section>
 
 <!-- ============================= ONE TEXTURE SET ============================= -->
@@ -292,7 +299,7 @@
   <h2 class="sec">One Texture Set for Multiple Objects</h2>
   <div class="rule"></div>
 
-  <div class="new"><p><b>1.6.2:</b> includes the production workflow for baking multiple meshes into one texture set, plus stronger shader, procedural-coordinate, edge-wear, and Blender 5.2 decal bake compatibility.</p></div>
+  <div class="new"><p><b>1.7.8:</b> every part keeps its own rotation, scale and mirroring while it bakes, so box-projected grunge and other object-space wear bake exactly as they look in the viewport. Decals placed with MatricX Pro can stay in the receivers' collection: the material steps skip them.</p></div>
 
   <h3>Texture Set Modes</h3>
   <table>
@@ -313,6 +320,7 @@
 
   <h3>MatricX Pro and Procedural Coordinates</h3>
   <p>MatricX Pro imperfection layers frequently use Object or Generated coordinates inside nested node groups. Joining several source objects changes the temporary object's bounds and normally shifts or stretches those masks. MatricX Bake stores each source object's original procedural coordinates and substitutes them only on temporary copied materials, so dirt, wear, noise, bump, and layered Mix Shader masks keep their original placement. Source materials and node groups are not modified.</p>
+  <p>Each part's own transform is kept as well. Image textures with Box projection (such as MatricX Pro's grunge), MatricX Pro's scale-safe coordinates, Vector Transform nodes, Texture Coordinate &gt; Normal and Object Info &gt; Location are evaluated with that part's own rotation, scale and mirroring, and the parts are joined in world space. A rotated, scaled or mirrored part no longer changes how the others bake.</p>
   <p>MatricX Dirt and Edge Wear mix complete shader closures, while a normal PBR texture set is rebuilt with one Principled shader. MatricX Bake applies channel-consistent MatricX flattening compensation so Dirt remains present without replacing broad metal regions with brown dielectric color, and Edge Wear does not become stronger than the source material. Other Mix Shader materials keep the standard linear conversion.</p>
 
   <h3>Modifiers and Mixed UV Layers</h3>
@@ -354,12 +362,18 @@
     <li>Opacity maps connect to Alpha and enable material transparency.</li>
     <li>For one texture set, the material is applied to all objects in the current bake scope.</li>
     <li>For one texture set, the material uses the named shared atlas UV map.</li>
+    <li>In a Selected, Collection or Visible scope (Per Object), every object in the scope is set up with its own maps.</li>
+    <li>Once the .blend is saved, the baked maps are stored relative to it, so the project can move to another folder or computer.</li>
   </ul>
+
+  <h3>Apply AO to Base Color (Blender Preview Only)</h3>
+  <p>Off by default. Turn it on to see contact shadows in Blender's viewport. Final Bake and Game Asset Export always leave it out, because game engines apply the AO map themselves.</p>
 
   <p>Setup Baked Material can read individual maps or packed maps. If individual AO/Roughness/Metallic maps are missing, it can split the packed map channels and use them instead.</p>
 
   <h3>Glass Materials</h3>
-  <p>Glass and refraction shaders can be baked into practical texture maps, but baked PBR maps cannot perfectly recreate live refraction, caustics, or transparent ray depth. For closest visual matching, bake Base Color with Include Scene Lighting, plus Roughness, Normal, and Opacity.</p>
+  <p>Glass and refraction shaders can be baked into practical texture maps, but baked PBR maps cannot perfectly recreate live refraction, caustics, or transparent ray depth. For closest visual matching, bake Base Color, Roughness, Normal and Opacity, and enable Bake Lit Color.</p>
+  <p>Glass exports through one portable Principled shader with transmission, IOR and tint. MatricX Pro's Tinted and Scope Glass keep their tint. View-dependent chromatic and refraction colour (Chromatic and Iridescent Glass) is skipped for Base Color and Lit Color, because it cannot transfer faithfully between renderers.</p>
 </section>
 
 <!-- ============================= DECALS, FINAL BAKE, EXPORT ============================= -->
@@ -369,11 +383,17 @@
   <div class="rule"></div>
 
   <h3>Bake Scene Decals</h3>
-  <p>The active mesh is the UV target. Decal sources can be selected objects or children of the target. Decal bake uses the main resolution, margin, output, and device settings.</p>
+  <p>The active mesh is the UV target. Decal bake uses the main resolution, margin, output, and device settings.</p>
+  <table>
+    <tr><th>Decal Sources</th><th>Behavior</th></tr>
+    <tr><td><b>Auto-Detect (Recommended)</b></td><td>Uses decals parented to the target, plus selected decals. Only meshes that are decals count: MatricX Pro or DECALmachine decals, or decal-named meshes or materials. Other selected or parented meshes are ignored, and the panel says how many.</td></tr>
+    <tr><td><b>Selected Only</b></td><td>Uses exactly the meshes you selected, decal or not.</td></tr>
+  </table>
+  <p>The panel shows how many decals will be baked before you start.</p>
 
   <h4>One Texture Set Decals</h4>
   <p>When Texture Set is set to One Texture Set, decal baking targets the full bake scope instead of only the active mesh. The add-on creates a temporary combined receiver, activates the shared atlas UV, and bakes decals into the same texture space as the shared material maps.</p>
-  <p>Use Collection scope for the receiver meshes, then select decal meshes outside that receiver collection or parent decals to the receivers and choose Target Children. Shared outputs use names like <code>MX_Combined_decal_color.png</code> and <code>MX_Combined_decal_mask.png</code>.</p>
+  <p>Set the receiver meshes through the bake scope (for example a Collection) and parent the decals to the receivers &mdash; MatricX Pro does this when you place a decal. The decals may sit in the same collection as the receivers: they are never treated as receivers, and Material Bake, Setup Baked Material and Final Bake skip them. Shared outputs use names like <code>MX_Combined_decal_color.png</code> and <code>MX_Combined_decal_mask.png</code>.</p>
 
   <h3>Combine Decal &amp; Material</h3>
   <p>Combine uses the decal mask for every channel and blends Base Color, Roughness, Metallic, and Normal into a new PBR material.</p>
@@ -385,7 +405,13 @@
   <p>Final Normal Strength controls the Normal Map node in the generated final material and defaults to <code>0.4</code>. This keeps normal-driven lighting from washing out the apparent Base Color or decal appearance. It does not weaken or modify the saved normal texture.</p>
 
   <h3>Game Asset Export</h3>
-  <p>Game Asset Export packages models, textures, and <code>asset_manifest.json</code>. Supported formats include FBX and GLB depending on the selected settings.</p>
+  <p>Game Asset Export packages the model, its textures, and <code>asset_manifest.json</code>.</p>
+  <ul>
+    <li><b>FBX</b> or <b>GLB</b>, with presets for Unity, Unreal Engine, Godot or Generic.</li>
+    <li>The exported material wires Base Color, Roughness, Metallic and Normal straight into the shader so game engines pick them up. GLB also carries AO in its Occlusion slot.</li>
+    <li>The baked UV map becomes UV channel 0, which game engines read.</li>
+    <li>Every baked map, including AO and Height, is copied to the Textures folder.</li>
+  </ul>
 </section>
 
 <!-- ============================= TROUBLESHOOTING ============================= -->
@@ -397,13 +423,17 @@
   <table>
     <tr><th>Problem</th><th>Fix</th></tr>
     <tr><td>Procedural texture looks stretched, repeated, or scrambled</td><td>Enable Auto-Fix Bake UVs, rebake, then run Setup Baked Material. For multiple objects, use One Texture Set with Pack Existing Islands or Rebuild Shared Atlas.</td></tr>
-    <tr><td>Shared atlas or baked material samples another object</td><td>Reinstall the latest 1.6.2 package and rebake. Combined material/final bakes now use source topology so modifier-generated inherited UVs cannot overwrite unrelated atlas regions.</td></tr>
+    <tr><td>Shared atlas or baked material samples another object</td><td>Install 1.7.8 and rebake. Combined material/final bakes now use source topology so modifier-generated inherited UVs cannot overwrite unrelated atlas regions.</td></tr>
     <tr><td>Shared decal appears on no mesh after Combine</td><td>Use One Texture Set and click Combine Set &amp; Apply to All. The combined material must be assigned across the entire receiver scope, not only the mesh under one decal.</td></tr>
     <tr><td>Only one object receives the material</td><td>Set the same bake scope used for baking, then run Setup Baked Material in One Texture Set mode.</td></tr>
-    <tr><td>Gradient bakes as one color</td><td>Rebake in 1.6.2. The Base Color resolver supports Gradient Texture, ColorRamp, and Mix Color chains.</td></tr>
-    <tr><td>Scene light shadows missing</td><td>Enable Include Scene Lighting and bake the object receiving the shadow.</td></tr>
+    <tr><td>Gradient bakes as one color</td><td>Rebake with 1.7.8. The Base Color resolver supports Gradient Texture, ColorRamp, and Mix Color chains.</td></tr>
+    <tr><td>Scene light shadows missing</td><td>Enable Bake Lit Color and bake the object receiving the shadow; the shadows are in the LitColor map.</td></tr>
+    <tr><td>Grunge or wear bakes as streaks or at the wrong scale in One Texture Set</td><td>Install 1.7.8 and rebake. Each part now keeps its own rotation and scale while baking.</td></tr>
+    <tr><td>Panel says &ldquo;0 decals found for this target&rdquo;</td><td>Parent the decals to the target (MatricX Pro does this when placing them), or switch Decal Sources to Selected Only and select them. In One Texture Set mode, 1.7.8 finds decals that sit in the receivers' collection.</td></tr>
+    <tr><td>Textures turn pink after moving a project</td><td>Bakes from 1.7.7 on are stored relative to the .blend. For older files, use File &gt; External Data &gt; Make Paths Relative, then save.</td></tr>
+    <tr><td>Trim faces lose their place on the trim sheet</td><td>Install 1.7.8. Prepare UVs keeps MatricX Pro trim faces and every bake step gives your active UV map back.</td></tr>
     <tr><td>Packed map not found</td><td>Enable AO, Roughness, and Metallic before packing. Check the output folder and manifest.</td></tr>
-    <tr><td>Advanced UV cannot run</td><td>On Windows, enable Online Access and download or set MinistryOfFlat_Release.zip. On macOS/Linux, use Normal UV mode.</td></tr>
+    <tr><td>Advanced UV cannot run</td><td>On Windows, enable Online Access and download or set MinistryOfFlat_Release.zip. On macOS/Linux, Advanced uses Blender's built-in unwrap.</td></tr>
     <tr><td>Old version still loads</td><td>Remove old add-on copies and restart Blender. Check the VS Code Blender Development source path if used.</td></tr>
   </table>
 </section>
@@ -414,11 +444,35 @@
   <h2 class="sec">Cross-Platform Notes</h2>
   <div class="rule"></div>
 
-  <p>MatricX Bake uses Blender and Python APIs for Windows, macOS, and Linux. GPU availability depends on Blender, OS, hardware, and drivers. CPU remains the fallback.</p>
+  <p>MatricX Bake uses Blender and Python APIs only: one build for Windows, macOS, and Linux. GPU baking (CUDA, OptiX, HIP, Metal or oneAPI) depends on Blender, the OS, hardware, and drivers; CPU always works as the fallback.</p>
+  <ul>
+    <li>Baked maps are stored relative to the saved .blend, so projects move between computers and systems.</li>
+    <li>Object names that Windows reserves (CON, PRN, AUX, NUL, COM1&ndash;9, LPT1&ndash;9) get an underscore in file names, so maps save on every system.</li>
+    <li>MinistryOfFlat (Advanced UV Unwrap) is Windows-only; its options are hidden on macOS and Linux.</li>
+  </ul>
 
   <div class="note"><p><b>License:</b> GNU General Public License v3.0 or later. See the included LICENSE file.</p></div>
 </section>
 
-<footer>MatricX Bake 1.6.2 &middot; Official Documentation &middot; July 2026</footer>
+<!-- ============================= WHAT'S NEW ============================= -->
+<section id="whatsnew">
+  <p class="kicker">SECTION 12</p>
+  <h2 class="sec">What&rsquo;s New in 1.7</h2>
+  <div class="rule"></div>
+
+  <table>
+    <tr><th>Area</th><th>Change</th></tr>
+    <tr><td><b>MatricX Pro 2.1</b></td><td>All 16 imperfection types and every material family bake correctly; Edge Rounding appears in normal maps; Tinted, Scope, Chromatic and Iridescent Glass are supported.</td></tr>
+    <tr><td><b>One Texture Set</b></td><td>Every part keeps its own rotation, scale and mirroring while it bakes; parts are joined in world space (1.7.8).</td></tr>
+    <tr><td><b>Decals</b></td><td>Auto-Detect only takes real decals; decals inside the bake scope are skipped by the material steps and found by Bake Scene Decals (1.7.6&ndash;1.7.8).</td></tr>
+    <tr><td><b>Trim sheets</b></td><td>MatricX Pro trims bake into the texture set; Prepare UVs keeps trim faces; every step gives your active UV map back.</td></tr>
+    <tr><td><b>Setup &amp; Final Bake</b></td><td>Follow the Selected, Collection or Visible scope object by object.</td></tr>
+    <tr><td><b>AO preview</b></td><td>Apply AO to Base Color is a Blender-only preview, off by default and never in Final Bake or Export.</td></tr>
+    <tr><td><b>Game Asset Export</b></td><td>Engine-ready material wiring for FBX and GLB, AO as GLB Occlusion, baked UV as channel 0.</td></tr>
+    <tr><td><b>Cross-platform</b></td><td>Relative texture paths, Windows reserved names handled, MinistryOfFlat options hidden off Windows (1.7.7).</td></tr>
+  </table>
+</section>
+
+<footer>MatricX Bake 1.7.8 &middot; Official Documentation &middot; October 2026</footer>
 
 </div>
