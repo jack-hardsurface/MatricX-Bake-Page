@@ -388,6 +388,12 @@ footer a:hover { color: var(--orange); }
   .mapx-scan { display: none; }
   .mapx-split, .mapx-focus, .mapx-cuts, .mapx-nums, .mt { transition: none; }
 }
+
+/* Small link to the other stores (store picker); hidden inside a store listing */
+.other-stores { display: inline-flex; align-items: center; min-height: 44px; margin-top: 6px; font-size: 13.5px; color: #9a9a9a;
+  text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+.other-stores:hover { color: var(--head); }
+.other-stores[hidden] { display: none; }
 </style>
 </head>
 <body>
@@ -652,7 +658,8 @@ footer a:hover { color: var(--orange); }
       <span class="badge">LAUNCH PRICE</span>
       <div class="price-row"><span class="was">$79</span><span class="now">$49</span></div>
       <div class="save">You save $30 (38% off)</div>
-      <a href="#pricing" class="btn btn-large" data-store-picker>Get MatricX Bake &mdash; $49</a>
+      <a href="https://eidosedge.gumroad.com/l/MatricXBake" target="_blank" rel="noopener" class="btn btn-large" data-store-picker>Get MatricX Bake &mdash; $49</a>
+      <a class="other-stores" href="https://superhivemarket.com/products/matricx-bake-game-ready-texture-blender" target="_blank" rel="noopener" data-other-stores>Other stores: Blender Market &middot; Payhip</a>
       <ul class="trust">
         <li>Instant download: add-on and Blender Extension</li>
         <li>Blender 4.5 &ndash; 5.2 &middot; Windows, macOS and Linux</li>
@@ -743,7 +750,7 @@ footer a:hover { color: var(--orange); }
     <p style="color:#a0a0a0; margin-bottom: 12px;">From node materials to an engine-ready texture set, in one panel.</p>
     <p class="final-price"><s>$79</s><b>$49</b>launch price</p>
     <div class="cta-row">
-      <a href="#pricing" class="btn btn-large" data-store-picker>Get MatricX Bake &mdash; $49</a>
+      <a href="https://eidosedge.gumroad.com/l/MatricXBake" target="_blank" rel="noopener" class="btn btn-large" data-store-picker>Get MatricX Bake &mdash; $49</a>
     </div>
   </section>
 
@@ -763,6 +770,8 @@ footer a:hover { color: var(--orange); }
 <script>
 /* Store picker. A store whose url is empty shows as "Link coming soon". */
 window.MX_STORE_PAGE = {
+  primary: 'Gumroad',
+  inFrame: 'Blender Market',
   product: 'Launch price · $49',
   sub: 'The same MatricX Bake 1.7.8 at $49 on every store. Pick the one you already use.',
   stores: [
@@ -773,16 +782,26 @@ window.MX_STORE_PAGE = {
 };
 </script>
 <script>
-/* Store picker, shared by the product pages.
-   A page sets window.MX_STORE_PAGE = { product, sub, stores: [{ name, url, note }] } before loading this file.
-   Every element with [data-store-picker] opens the choice. A store without a url shows as "Link coming soon", so a link is never guessed.
-   Without JavaScript (or <dialog> support) a buy button simply follows its own href. */
+/* Buy buttons: straight to the main store (Gumroad); inside a store listing (the page is shown in a frame) to that
+   listing's store (Blender Market). Elements with [data-other-stores] open the store picker; they are hidden in a frame.
+   A page sets window.MX_STORE_PAGE = { product, sub, primary, inFrame, stores: [{ name, url, note }] } before this file.
+   A store without a url shows as "Link coming soon" in the picker, so a link is never guessed. */
 (function () {
   var cfg = window.MX_STORE_PAGE;
   if (!cfg) return;
   var stores = (cfg.stores || []).filter(Boolean);
   var live = stores.filter(function (s) { return s.url; });
-  if (!stores.length) return;
+  if (!live.length) return;
+  var framed = false;
+  try { framed = window.self !== window.top; } catch (e) { framed = true; }
+  var byName = function (name) { return live.filter(function (s) { return s.name === name; })[0]; };
+  var main = (framed ? byName(cfg.inFrame) : byName(cfg.primary)) || live[0];
+  document.querySelectorAll('[data-store-picker]').forEach(function (b) {
+    b.href = main.url; b.target = '_blank'; b.rel = 'noopener';
+  });
+
+  var others = document.querySelectorAll('[data-other-stores]');
+  if (framed) { others.forEach(function (a) { a.hidden = true; }); return; }
 
   var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
   var dlg = document.createElement('dialog');
@@ -811,17 +830,13 @@ window.MX_STORE_PAGE = {
       '<p class="stores-foot">Checkout, payment and refunds are handled by the store you choose.</p>' +
     '</div>';
   document.body.appendChild(dlg);
-
-  var buttons = document.querySelectorAll('[data-store-picker]');
-  // Buttons point at the first available store even without the picker.
-  if (live.length) buttons.forEach(function (b) { b.href = live[0].url; });
   if (typeof dlg.showModal !== 'function') return;
 
   var opener = null;
-  buttons.forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
+  others.forEach(function (a) {
+    a.addEventListener('click', function (e) {
       e.preventDefault();
-      opener = btn;
+      opener = a;
       dlg.showModal();
       var first = dlg.querySelector('a.store');
       if (first) first.focus();
